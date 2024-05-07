@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Trigger
+  - TriggerToGameRoom
+  - TriggerToLevel1
   layers:
   - Default
   - TransparentFX
