@@ -8,6 +8,8 @@ TagManager:
   - Trigger
   - TriggerToGameRoom
   - TriggerToLevel1
+  - Bloc
+  - TriggerToLevel2
   layers:
   - Default
   - TransparentFX

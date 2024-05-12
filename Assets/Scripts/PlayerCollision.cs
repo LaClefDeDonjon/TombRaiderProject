@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerCollision : MonoBehaviour
 {
     private bool _isColliding = false;
-    
-
+    public bool _isCameraColliding = false;
 
     // Start is called before the first frame update
     void Start()
@@ -31,12 +30,29 @@ public class PlayerCollision : MonoBehaviour
 
         if (collider.gameObject.tag == "TriggerToGameRoom")
         {
+            Debug.Log("collision with TriggerGameRoom");
+
             SceneManager.LoadScene("GameRoom");
         }
 
         if (collider.gameObject.tag == "TriggerToLevel1")
         {
             SceneManager.LoadScene("Level 1");
+        }
+
+        if (collider.gameObject.tag == "TriggerToLevel2")
+        {
+            SceneManager.LoadScene("Level 2");
+        }
+
+
+        if (collider.gameObject.name == "Main Camera" && collider.gameObject.tag == "Bloc")
+        {
+            _isCameraColliding = true;
+        }
+        else
+        {
+            _isCameraColliding = false;
         }
 
         //Debug.Log("Collision enter: " + collision.gameObject.name);
@@ -61,5 +77,12 @@ public class PlayerCollision : MonoBehaviour
     {
         return _isColliding;
     }
+
+    public bool GetCameraColliding ()
+    {
+        return _isCameraColliding;
+    }
+
+    
 
 }
