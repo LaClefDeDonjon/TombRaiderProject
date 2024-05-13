@@ -10,6 +10,7 @@ TagManager:
   - TriggerToLevel1
   - Bloc
   - TriggerToLevel2
+  - Wall
   layers:
   - Default
   - TransparentFX

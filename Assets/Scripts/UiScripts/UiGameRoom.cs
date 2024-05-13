@@ -114,12 +114,13 @@ public class UiGameRoom : MonoBehaviour
         movement.y = _velocity.y;
 
         CharacterController.Move(movement);
-
+        CharacterController.transform.Rotate(Vector3.up * Direction.x * _speedRotate * Time.deltaTime);
+        /*
         if (_scriptCollision.GetCameraColliding() == false)
         {
             CharacterController.transform.Rotate(Vector3.up * Direction.x * _speedRotate * Time.deltaTime);
         }
-        
+        */
 
         if (Direction.magnitude > 0.1 && _animatorPlayer.GetCurrentAnimatorStateInfo(0).IsName("Jump") == false) 
         {
