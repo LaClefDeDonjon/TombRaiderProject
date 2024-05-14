@@ -7,6 +7,11 @@ public class PlayerCollision : MonoBehaviour
 {
     private GameObject _isColliding;
     //private bool _isCameraColliding = false;
+    private bool _leverIsOn = false;
+
+    [SerializeField] private int _lifeMax = 100;
+    [SerializeField] private int _lifeCurrent = 100;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -30,8 +35,8 @@ public class PlayerCollision : MonoBehaviour
     }
 
 
-        void OnTriggerEnter(Collider collider)
-        {
+    void OnTriggerEnter(Collider collider)
+    {
             if (collider.gameObject.tag == "Ground")
             {
                 Debug.Log("collision with groud");
@@ -55,6 +60,17 @@ public class PlayerCollision : MonoBehaviour
                 SceneManager.LoadScene("Level 2");
             }
 
+            if (collider.gameObject.tag == "Lever")
+            {
+                _leverIsOn = true;
+                Debug.Log("Lever is True");
+            }
+
+            if (collider.gameObject.tag == "Damage")
+            {
+                Debug.Log("OnTriggerEnter Damage");
+                ChangeLife(collider.gameObject.GetComponent<Damage>().GetDamageCost());
+            }
 
             //Tentative de collision de camera
             /*
@@ -69,7 +85,7 @@ public class PlayerCollision : MonoBehaviour
             */
 
             //Debug.Log("Collision enter: " + collision.gameObject.name);
-        }
+    }
 
     //void OnCollisionStay(Collision collision)
     //{
@@ -84,11 +100,47 @@ public class PlayerCollision : MonoBehaviour
             _isColliding = null;
         }
 
+        if (collider.gameObject.tag == "Lever")
+        {
+            _leverIsOn = false;
+            Debug.Log("Lever is False");
+        }
+
+    }
+
+    public void ChangeLife(int point)
+    {
+        _lifeCurrent = _lifeCurrent + point;
+        if (_lifeCurrent < 0)
+        {
+            _lifeCurrent = 0;
+        }
+
+        if (_lifeCurrent > _lifeMax)
+        {
+            _lifeCurrent = _lifeMax;
+        }
+
     }
 
     public bool GetColliding ()
     {
         return _isColliding != null;
+    }
+
+    public bool GetLeverState ()
+    {
+        return _leverIsOn;
+    }
+
+    public int GetCurrentLife()
+    {
+        return _lifeCurrent;
+    }
+
+    public int GetLifeMax()
+    {
+        return _lifeMax;
     }
 
     /*

@@ -11,6 +11,8 @@ TagManager:
   - Bloc
   - TriggerToLevel2
   - Wall
+  - Lever
+  - Damage
   layers:
   - Default
   - TransparentFX

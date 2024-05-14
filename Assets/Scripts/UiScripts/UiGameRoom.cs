@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -13,20 +14,36 @@ public class UiGameRoom : MonoBehaviour
     [SerializeField] private float _speedRotate = 1f;
     [SerializeField] private CharacterController CharacterController;
     [SerializeField] private Animator _animatorPlayer;
+    [SerializeField] private GameObject _effectLever;
+    [SerializeField] private GameObject _rotateLever;
+
 
     private Vector3 _velocity=Vector3.zero;
     [SerializeField] private float _gravity = 0.098f;
 
     [SerializeField] private PlayerCollision _scriptCollision;
-    private bool _isJumpPressed = false;
+    [SerializeField] private DoorCollision _scriptDoorCollision;
+    //private bool _isJumpPressed = false;
     [SerializeField] private float _jumpImpulse = 1f;
+
+    [SerializeField] private Slider _lifeBar;
+
+    [SerializeField] private GameObject _gun;
+    [SerializeField] private GameObject _bullet;
+
+    private bool _leverIsPressed;
+
+
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        _lifeBar.maxValue = _scriptCollision.GetLifeMax();
+        _lifeBar.minValue = 0;
+        _lifeBar.value = _scriptCollision.GetCurrentLife();
     }
-   
+
 
     /*
     public void PressedForward()
@@ -53,6 +70,11 @@ public class UiGameRoom : MonoBehaviour
         BotTransform.position = new Vector3(BotTransform.position.x - 0.5f, BotTransform.position.y, BotTransform.position.z);
     }
     */
+
+
+
+
+
 
     public void Move(InputAction.CallbackContext Context)      //"Context" est un ptit nom temporaire
     {
@@ -91,10 +113,36 @@ public class UiGameRoom : MonoBehaviour
         //_isJumpPressed = !_isJumpPressed;  <-- On peut aussi faire ça, le "!" indique l'inverse de la variable
     }
 
+
+    public void Lever(InputAction.CallbackContext Context)
+    {
+        if (_scriptCollision.GetLeverState() == true)
+        {
+            _leverIsPressed = true;
+            
+            Debug.Log("leverPressed est a true");
+        }
+
+    }
+
+
     // Update is called once per frame
     void FixedUpdate()
     {
         
+        if (_leverIsPressed == true && _scriptDoorCollision.GetLeverStateFinal() == true && (_effectLever.transform.rotation.eulerAngles.y > 270f || _effectLever.transform.rotation.eulerAngles.y < 5f))
+        {
+            Debug.Log("Rot y "+_effectLever.transform.rotation.eulerAngles.y);
+            _effectLever.transform.Rotate(new Vector3(0, -5f, 0));
+            _rotateLever.transform.Rotate(new Vector3(5f, 0, 0));
+        }
+
+        //if (_scriptDoorCollision.GetLeverStateFinal() == false)
+        //{
+        //    _effectLever.transform.Rotate(new Vector3(0, 0, 0));
+        //    Debug.Log("ça arrive ici");
+        //}
+
 
         //Gravity
         if (_scriptCollision.GetColliding() == true && _velocity.y <= 0)
@@ -140,9 +188,12 @@ public class UiGameRoom : MonoBehaviour
             _animatorPlayer.SetBool("IsRunning", false);
             CharacterController.Move(CharacterController.transform.up *_velocity.y);
         }
-        
-        
-        
+
+
+        //Pour les dégâts
+        _lifeBar.value = _scriptCollision.GetCurrentLife();
+
+
 
         //if (_isJumpPressed == true)
         //{
@@ -153,8 +204,9 @@ public class UiGameRoom : MonoBehaviour
         //    StartCoroutine(StopJumping());
         //    _isJumpPressed = false;
         //}
- 
+
     }
+
 
     IEnumerator StopJumping()
     {
