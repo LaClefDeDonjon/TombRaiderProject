@@ -29,7 +29,7 @@ public class UiGameRoom : MonoBehaviour
     [SerializeField] private Slider _lifeBar;
 
     [SerializeField] private GameObject _gun;
-    [SerializeField] private GameObject _bullet;
+
 
     private bool _leverIsPressed;
 
@@ -125,6 +125,20 @@ public class UiGameRoom : MonoBehaviour
 
     }
 
+    public void Shoot(InputAction.CallbackContext Context)
+    {
+        if (Context.phase == InputActionPhase.Started && _scriptCollision.GetColliding() == true)
+        {
+            
+            Debug.Log("press");
+            _animatorPlayer.SetBool("IsShooting", true);
+
+            StartCoroutine(StopShooting());
+            
+        }
+    }
+
+
 
     // Update is called once per frame
     void FixedUpdate()
@@ -213,6 +227,13 @@ public class UiGameRoom : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         _animatorPlayer.SetBool("IsJumping", false);
         
+    }
+
+    IEnumerator StopShooting()
+    {
+        yield return new WaitForSeconds(0.1f);
+        _animatorPlayer.SetBool("IsShooting", false);
+
     }
 
 }

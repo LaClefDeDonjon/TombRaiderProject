@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 971361193445749717}
   - component: {fileID: 8514377298702269961}
   - component: {fileID: 2220993029202158896}
+  - component: {fileID: -7134837422637228436}
   - component: {fileID: 3857544228180839559}
   m_Layer: 0
   m_Name: Bullet
@@ -84,6 +85,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-7134837422637228436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3141199966761202260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcf9b29fabe87d849854d6b17d65c40c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speedShoot: 1
+  _timerBullet: 0
+  _timerBulletLifeTime: 1
 --- !u!136 &3857544228180839559
 CapsuleCollider:
   m_ObjectHideFlags: 0
