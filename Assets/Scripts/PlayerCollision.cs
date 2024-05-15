@@ -8,6 +8,7 @@ public class PlayerCollision : MonoBehaviour
     private GameObject _isColliding;
     //private bool _isCameraColliding = false;
     private bool _leverIsOn = false;
+    private bool _leverIsOn2 = false;
 
     [SerializeField] private int _lifeMax = 100;
     [SerializeField] private int _lifeCurrent = 100;
@@ -31,6 +32,12 @@ public class PlayerCollision : MonoBehaviour
         {
             Debug.Log("collision with groud");
             _isColliding = collider.gameObject;
+        }
+
+        if (collider.gameObject.tag == "Damage")
+        {
+            Debug.Log("OnTriggerEnter Damage");
+            ChangeLife(collider.gameObject.GetComponent<Damage>().GetDamageCost());
         }
     }
 
@@ -64,6 +71,12 @@ public class PlayerCollision : MonoBehaviour
             {
                 _leverIsOn = true;
                 Debug.Log("Lever is True");
+            }
+
+            if (collider.gameObject.tag == "Lever2")
+            {
+                _leverIsOn2 = true;
+                Debug.Log("Lever2 is True");
             }
 
             if (collider.gameObject.tag == "Damage")
@@ -106,6 +119,12 @@ public class PlayerCollision : MonoBehaviour
             Debug.Log("Lever is False");
         }
 
+        if (collider.gameObject.tag == "Lever2")
+        {
+            _leverIsOn2 = false;
+            Debug.Log("Lever2 is False");
+        }
+
     }
 
     public void ChangeLife(int point)
@@ -131,6 +150,11 @@ public class PlayerCollision : MonoBehaviour
     public bool GetLeverState ()
     {
         return _leverIsOn;
+    }
+
+    public bool GetLeverState2()
+    {
+        return _leverIsOn2;
     }
 
     public int GetCurrentLife()

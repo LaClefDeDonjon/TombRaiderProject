@@ -25,10 +25,13 @@ public class DoorCollision : MonoBehaviour
             _leverState = false;
             Debug.Log("_leverState à false");
         }
+
+
     }
 
     public bool GetLeverStateFinal ()
     {
         return _leverState;
     }
+    
 }

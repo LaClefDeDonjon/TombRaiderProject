@@ -16,13 +16,17 @@ public class UiGameRoom : MonoBehaviour
     [SerializeField] private Animator _animatorPlayer;
     [SerializeField] private GameObject _effectLever;
     [SerializeField] private GameObject _rotateLever;
-
+    [SerializeField] private GameObject _effectLever2;
+    [SerializeField] private GameObject _rotateLever2;
+    [SerializeField] private GameObject _secretDoor;
+    private bool _isSecretDoorOpen = false;
 
     private Vector3 _velocity=Vector3.zero;
     [SerializeField] private float _gravity = 0.098f;
 
     [SerializeField] private PlayerCollision _scriptCollision;
     [SerializeField] private DoorCollision _scriptDoorCollision;
+    [SerializeField] private DoorCollision2 _scriptDoorCollision2;
     //private bool _isJumpPressed = false;
     [SerializeField] private float _jumpImpulse = 1f;
 
@@ -32,6 +36,7 @@ public class UiGameRoom : MonoBehaviour
 
 
     private bool _leverIsPressed;
+    private bool _leverIsPressed2;
 
 
 
@@ -123,6 +128,13 @@ public class UiGameRoom : MonoBehaviour
             Debug.Log("leverPressed est a true");
         }
 
+        if (_scriptCollision.GetLeverState2() == true)
+        {
+            _leverIsPressed2 = true;
+
+            Debug.Log("leverPressed2 est a true");
+        }
+
     }
 
     public void Shoot(InputAction.CallbackContext Context)
@@ -150,6 +162,20 @@ public class UiGameRoom : MonoBehaviour
             _effectLever.transform.Rotate(new Vector3(0, -5f, 0));
             _rotateLever.transform.Rotate(new Vector3(5f, 0, 0));
         }
+
+        if (_leverIsPressed2 == true && _scriptDoorCollision2.GetLeverStateFinal2() == true && (_effectLever2.transform.rotation.eulerAngles.y > 185f || _effectLever2.transform.rotation.eulerAngles.y < 5f))
+        {
+            Debug.Log("Rot y " + _effectLever2.transform.rotation.eulerAngles.y);
+            _effectLever2.transform.Rotate(new Vector3(0, -5f, 0));
+            _rotateLever2.transform.Rotate(new Vector3(-5f, 0, 0));
+            Destroy(_secretDoor);
+            
+        }
+
+        //if (_isSecretDoorOpen == true)
+        //{
+        //    _secretDoor.transform.Translate(new Vector3(0, -5f, 0));
+        //}
 
         //if (_scriptDoorCollision.GetLeverStateFinal() == false)
         //{
