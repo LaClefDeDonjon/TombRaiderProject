@@ -14,6 +14,8 @@ TagManager:
   - Lever
   - Damage
   - Lever2
+  - Lever3
+  - Lever4
   layers:
   - Default
   - TransparentFX

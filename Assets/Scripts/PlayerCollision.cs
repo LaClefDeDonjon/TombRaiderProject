@@ -9,6 +9,8 @@ public class PlayerCollision : MonoBehaviour
     //private bool _isCameraColliding = false;
     private bool _leverIsOn = false;
     private bool _leverIsOn2 = false;
+    private bool _leverIsOn3 = false;
+    private bool _leverIsOn4 = false;
 
     [SerializeField] private int _lifeMax = 100;
     [SerializeField] private int _lifeCurrent = 100;
@@ -79,7 +81,19 @@ public class PlayerCollision : MonoBehaviour
                 Debug.Log("Lever2 is True");
             }
 
-            if (collider.gameObject.tag == "Damage")
+            if (collider.gameObject.tag == "Lever3")
+            {
+                _leverIsOn3 = true;
+                Debug.Log("Lever3 is True");
+            }
+
+            if (collider.gameObject.tag == "Lever4")
+            {
+                _leverIsOn4 = true;
+                Debug.Log("Lever4 is True");
+            }
+
+        if (collider.gameObject.tag == "Damage")
             {
                 Debug.Log("OnTriggerEnter Damage");
                 ChangeLife(collider.gameObject.GetComponent<Damage>().GetDamageCost());
@@ -125,6 +139,18 @@ public class PlayerCollision : MonoBehaviour
             Debug.Log("Lever2 is False");
         }
 
+        if (collider.gameObject.tag == "Lever3")
+        {
+            _leverIsOn3 = false;
+            Debug.Log("Lever3 is False");
+        }
+
+        if (collider.gameObject.tag == "Lever4")
+        {
+            _leverIsOn4 = false;
+            Debug.Log("Lever4 is False");
+        }
+
     }
 
     public void ChangeLife(int point)
@@ -155,6 +181,16 @@ public class PlayerCollision : MonoBehaviour
     public bool GetLeverState2()
     {
         return _leverIsOn2;
+    }
+
+    public bool GetLeverState3()
+    {
+        return _leverIsOn3;
+    }
+
+    public bool GetLeverState4()
+    {
+        return _leverIsOn4;
     }
 
     public int GetCurrentLife()

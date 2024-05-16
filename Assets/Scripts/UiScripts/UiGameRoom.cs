@@ -19,7 +19,10 @@ public class UiGameRoom : MonoBehaviour
     [SerializeField] private GameObject _effectLever2;
     [SerializeField] private GameObject _rotateLever2;
     [SerializeField] private GameObject _secretDoor;
-    private bool _isSecretDoorOpen = false;
+    [SerializeField] private GameObject _effectLever3;
+    [SerializeField] private GameObject _rotateLever3;
+    [SerializeField] private GameObject _effectLever4;
+    [SerializeField] private GameObject _rotateLever4;
 
     private Vector3 _velocity=Vector3.zero;
     [SerializeField] private float _gravity = 0.098f;
@@ -27,6 +30,9 @@ public class UiGameRoom : MonoBehaviour
     [SerializeField] private PlayerCollision _scriptCollision;
     [SerializeField] private DoorCollision _scriptDoorCollision;
     [SerializeField] private DoorCollision2 _scriptDoorCollision2;
+    [SerializeField] private DorrCollision3 _scriptDoorCollision3;
+    [SerializeField] private DoorCollision4 _scriptDoorCollision4;
+
     //private bool _isJumpPressed = false;
     [SerializeField] private float _jumpImpulse = 1f;
 
@@ -37,6 +43,8 @@ public class UiGameRoom : MonoBehaviour
 
     private bool _leverIsPressed;
     private bool _leverIsPressed2;
+    private bool _leverIsPressed3;
+    private bool _leverIsPressed4;
 
 
 
@@ -135,6 +143,20 @@ public class UiGameRoom : MonoBehaviour
             Debug.Log("leverPressed2 est a true");
         }
 
+        if (_scriptCollision.GetLeverState3() == true)
+        {
+            _leverIsPressed3 = true;
+
+            Debug.Log("leverPressed3 est a true");
+        }
+
+        if (_scriptCollision.GetLeverState4() == true)
+        {
+            _leverIsPressed4 = true;
+
+            Debug.Log("leverPressed4 est a true");
+        }
+
     }
 
     public void Shoot(InputAction.CallbackContext Context)
@@ -170,6 +192,23 @@ public class UiGameRoom : MonoBehaviour
             _rotateLever2.transform.Rotate(new Vector3(-5f, 0, 0));
             Destroy(_secretDoor);
             
+        }
+
+        if (_leverIsPressed3 == true && _scriptDoorCollision3.GetLeverStateFinal3() == true && (_effectLever3.transform.rotation.eulerAngles.y > 90f || _effectLever3.transform.rotation.eulerAngles.y < 5f))
+        {
+            Debug.Log("Rot y " + _effectLever3.transform.rotation.eulerAngles.y);
+            _effectLever3.transform.Rotate(new Vector3(0, -5f, 0));
+            _rotateLever3.transform.Rotate(new Vector3(5f, 0, 0));
+
+        }
+
+
+        if (_leverIsPressed4 == true /*&& _scriptDoorCollision4.GetLeverStateFinal4() == true*/ && (_effectLever4.transform.rotation.eulerAngles.x > -1f && _effectLever4.transform.rotation.eulerAngles.x < 90f))
+        {
+            Debug.Log("Rot y " + _effectLever4.transform.rotation.eulerAngles.y);
+            _effectLever4.transform.Rotate(new Vector3(1f, 0, 0));
+            _rotateLever4.transform.Rotate(new Vector3(0.25f, 0, 0));
+
         }
 
         //if (_isSecretDoorOpen == true)
