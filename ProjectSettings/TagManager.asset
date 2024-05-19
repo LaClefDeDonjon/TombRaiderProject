@@ -16,6 +16,7 @@ TagManager:
   - Lever2
   - Lever3
   - Lever4
+  - Bullet
   layers:
   - Default
   - TransparentFX
