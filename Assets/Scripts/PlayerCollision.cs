@@ -11,10 +11,15 @@ public class PlayerCollision : MonoBehaviour
     private bool _leverIsOn2 = false;
     private bool _leverIsOn3 = false;
     private bool _leverIsOn4 = false;
+    private bool _leverIsOn5 = false;
 
     [SerializeField] private int _lifeMax = 100;
     [SerializeField] private int _lifeCurrent = 100;
-    
+
+
+
+    //[SerializeField] private GameObject _badtemp;
+
 
     // Start is called before the first frame update
     void Start()
@@ -93,11 +98,19 @@ public class PlayerCollision : MonoBehaviour
                 Debug.Log("Lever4 is True");
             }
 
-        if (collider.gameObject.tag == "Damage")
+            if (collider.gameObject.tag == "Lever5")
+            {
+                _leverIsOn5 = true;
+                Debug.Log("Lever5 is False");
+            }
+
+            if (collider.gameObject.tag == "Damage")
             {
                 Debug.Log("OnTriggerEnter Damage");
                 ChangeLife(collider.gameObject.GetComponent<Damage>().GetDamageCost());
             }
+
+
 
             //Tentative de collision de camera
             /*
@@ -151,6 +164,12 @@ public class PlayerCollision : MonoBehaviour
             Debug.Log("Lever4 is False");
         }
 
+        if (collider.gameObject.tag == "Lever5")
+        {
+            _leverIsOn5 = false;
+            Debug.Log("Lever5 is False");
+        }
+
     }
 
     public void ChangeLife(int point)
@@ -167,6 +186,8 @@ public class PlayerCollision : MonoBehaviour
         }
 
     }
+
+
 
     public bool GetColliding ()
     {
@@ -193,15 +214,24 @@ public class PlayerCollision : MonoBehaviour
         return _leverIsOn4;
     }
 
+    public bool GetLeverState5()
+    {
+        return _leverIsOn5;
+    }
+
     public int GetCurrentLife()
     {
         return _lifeCurrent;
     }
 
+
+
     public int GetLifeMax()
     {
         return _lifeMax;
     }
+
+
 
     /*
     public bool GetCameraColliding ()
@@ -209,6 +239,6 @@ public class PlayerCollision : MonoBehaviour
         return _isCameraColliding;
     }
     */
-    
+
 
 }

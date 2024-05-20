@@ -17,6 +17,10 @@ TagManager:
   - Lever3
   - Lever4
   - Bullet
+  - Test
+  - Enemy
+  - Lever5
+  - Switch
   layers:
   - Default
   - TransparentFX

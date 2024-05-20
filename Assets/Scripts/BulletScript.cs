@@ -19,11 +19,20 @@ public class BulletScript : MonoBehaviour
     void Update()
     {
         _timerBullet = _timerBullet + Time.deltaTime;
-        transform.Translate(gameObject.transform.forward * _speedShoot * Time.deltaTime);
+        transform.Translate(new Vector3(0, 1f, 0) /*gameObject.transform.forward*/ * _speedShoot * Time.deltaTime);
 
         if (_timerBullet > _timerBulletLifeTime)
         {
             Destroy(gameObject );
         }
     }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Destroy(gameObject);
+        } 
+    }
+
 }

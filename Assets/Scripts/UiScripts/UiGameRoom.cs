@@ -22,7 +22,9 @@ public class UiGameRoom : MonoBehaviour
     [SerializeField] private GameObject _effectLever3;
     [SerializeField] private GameObject _rotateLever3;
     [SerializeField] private GameObject _effectLever4;
+    [SerializeField] private GameObject _effectLever5;
     [SerializeField] private GameObject _rotateLever4;
+    [SerializeField] private GameObject _rotateLever5;
 
     private Vector3 _velocity=Vector3.zero;
     [SerializeField] private float _gravity = 0.098f;
@@ -32,11 +34,14 @@ public class UiGameRoom : MonoBehaviour
     [SerializeField] private DoorCollision2 _scriptDoorCollision2;
     [SerializeField] private DorrCollision3 _scriptDoorCollision3;
     [SerializeField] private DoorCollision4 _scriptDoorCollision4;
+    [SerializeField] private DoorCollision5 _scriptDoorCollision5;
+    [SerializeField] private BadGuyScript _badGuyScript;
 
     //private bool _isJumpPressed = false;
     [SerializeField] private float _jumpImpulse = 1f;
 
     [SerializeField] private Slider _lifeBar;
+    [SerializeField] private Slider _badGuyLifeBar;
 
     [SerializeField] private GameObject _gun;
 
@@ -45,6 +50,7 @@ public class UiGameRoom : MonoBehaviour
     private bool _leverIsPressed2;
     private bool _leverIsPressed3;
     private bool _leverIsPressed4;
+    private bool _leverIsPressed5;
 
 
 
@@ -55,6 +61,10 @@ public class UiGameRoom : MonoBehaviour
         _lifeBar.maxValue = _scriptCollision.GetLifeMax();
         _lifeBar.minValue = 0;
         _lifeBar.value = _scriptCollision.GetCurrentLife();
+
+        _badGuyLifeBar.maxValue = _badGuyScript.GetBadLifeMax();
+        _badGuyLifeBar.minValue = 0;
+        _badGuyLifeBar.value = _badGuyScript.GetCurrentBadLife();
     }
 
 
@@ -157,6 +167,13 @@ public class UiGameRoom : MonoBehaviour
             Debug.Log("leverPressed4 est a true");
         }
 
+        if (_scriptCollision.GetLeverState5() == true)
+        {
+            _leverIsPressed5 = true;
+
+            Debug.Log("leverPressed5 est a true");
+        }
+
     }
 
     public void Shoot(InputAction.CallbackContext Context)
@@ -208,6 +225,14 @@ public class UiGameRoom : MonoBehaviour
             Debug.Log("Rot y " + _effectLever4.transform.rotation.eulerAngles.y);
             _effectLever4.transform.Rotate(new Vector3(1f, 0, 0));
             _rotateLever4.transform.Rotate(new Vector3(0.25f, 0, 0));
+
+        }
+
+        if (_leverIsPressed5 == true /*&& _scriptDoorCollision5.GetLeverStateFinal5() == true*/ && (_effectLever5.transform.rotation.eulerAngles.y > 0f /*|| _effectLever5.transform.rotation.eulerAngles.y < 5f*/))
+        {
+            Debug.Log("Rot y " + _effectLever5.transform.rotation.eulerAngles.y);
+            _effectLever5.transform.Rotate(new Vector3(0, -5f, 0));
+            _rotateLever5.transform.Rotate(new Vector3(5f, 0, 0));
 
         }
 
@@ -271,6 +296,8 @@ public class UiGameRoom : MonoBehaviour
 
         //Pour les dégâts
         _lifeBar.value = _scriptCollision.GetCurrentLife();
+
+        _badGuyLifeBar.value = _badGuyScript.GetCurrentBadLife();
 
 
 
