@@ -12,6 +12,8 @@ public class PlayerCollision : MonoBehaviour
     private bool _leverIsOn3 = false;
     private bool _leverIsOn4 = false;
     private bool _leverIsOn5 = false;
+    private bool _switchIsOn = false;
+    private bool _switchIsOn2 = false;
 
     [SerializeField] private int _lifeMax = 100;
     [SerializeField] private int _lifeCurrent = 100;
@@ -101,10 +103,22 @@ public class PlayerCollision : MonoBehaviour
             if (collider.gameObject.tag == "Lever5")
             {
                 _leverIsOn5 = true;
-                Debug.Log("Lever5 is False");
+                Debug.Log("Lever5 is True");
             }
 
-            if (collider.gameObject.tag == "Damage")
+            if (collider.gameObject.tag == "Switch")
+            {
+                _switchIsOn = true;
+                Debug.Log("Switch is True");
+            }
+
+            if (collider.gameObject.tag == "Switch2")
+            {
+                _switchIsOn2 = true;
+                Debug.Log("Switch2 is True");
+            }
+
+        if (collider.gameObject.tag == "Damage")
             {
                 Debug.Log("OnTriggerEnter Damage");
                 ChangeLife(collider.gameObject.GetComponent<Damage>().GetDamageCost());
@@ -170,6 +184,18 @@ public class PlayerCollision : MonoBehaviour
             Debug.Log("Lever5 is False");
         }
 
+        if (collider.gameObject.tag == "Switch")
+        {
+            _switchIsOn = false;
+            Debug.Log("Switch is false");
+        }
+
+        if (collider.gameObject.tag == "Switch2")
+        {
+            _switchIsOn2 = false;
+            Debug.Log("Switch2 is false");
+        }
+
     }
 
     public void ChangeLife(int point)
@@ -217,6 +243,16 @@ public class PlayerCollision : MonoBehaviour
     public bool GetLeverState5()
     {
         return _leverIsOn5;
+    }
+
+    public bool GetSwitchState()
+    {
+        return _switchIsOn;
+    }
+
+    public bool GetSwitchState2()
+    {
+        return _switchIsOn2;
     }
 
     public int GetCurrentLife()

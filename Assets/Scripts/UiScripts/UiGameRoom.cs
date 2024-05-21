@@ -25,6 +25,10 @@ public class UiGameRoom : MonoBehaviour
     [SerializeField] private GameObject _effectLever5;
     [SerializeField] private GameObject _rotateLever4;
     [SerializeField] private GameObject _rotateLever5;
+    [SerializeField] private GameObject _cube1;
+    [SerializeField] private GameObject _rotateSwitch;
+    [SerializeField] private GameObject _cube2;
+    [SerializeField] private GameObject _rotateSwitch2;
 
     private Vector3 _velocity=Vector3.zero;
     [SerializeField] private float _gravity = 0.098f;
@@ -36,6 +40,8 @@ public class UiGameRoom : MonoBehaviour
     [SerializeField] private DoorCollision4 _scriptDoorCollision4;
     [SerializeField] private DoorCollision5 _scriptDoorCollision5;
     [SerializeField] private BadGuyScript _badGuyScript;
+    [SerializeField] private CubeCollision1 _scriptCubeCollision1;
+    [SerializeField] private CubeCollision2 _scriptCubeCollision2;
 
     //private bool _isJumpPressed = false;
     [SerializeField] private float _jumpImpulse = 1f;
@@ -51,6 +57,10 @@ public class UiGameRoom : MonoBehaviour
     private bool _leverIsPressed3;
     private bool _leverIsPressed4;
     private bool _leverIsPressed5;
+    private bool _switchIsPressed;
+    private bool _switchIsPressed2;
+    private bool _stopCube1 = false;
+    private bool _stopCube2 = false;
 
 
 
@@ -174,6 +184,20 @@ public class UiGameRoom : MonoBehaviour
             Debug.Log("leverPressed5 est a true");
         }
 
+        if (_scriptCollision.GetSwitchState() == true)
+        {
+            _switchIsPressed = true;
+
+            Debug.Log("_switchIsPressed est a true");
+        }
+
+        if (_scriptCollision.GetSwitchState2() == true)
+        {
+            _switchIsPressed2 = true;
+
+            Debug.Log("_switchIsPressed2 est a true");
+        }
+
     }
 
     public void Shoot(InputAction.CallbackContext Context)
@@ -235,6 +259,37 @@ public class UiGameRoom : MonoBehaviour
             _rotateLever5.transform.Rotate(new Vector3(5f, 0, 0));
 
         }
+
+        if (_switchIsPressed == true && _stopCube1 == false)
+        {
+            _cube1.transform.position = new Vector3(_cube1.transform.position.x, _cube1.transform.position.y + 0.05f, _cube1.transform.position.z);
+            _rotateSwitch.transform.Rotate(new Vector3(0, 0, 2f));
+            Debug.Log("Cube1 Monte");
+
+        }
+
+        if (_scriptCubeCollision1.GetSwitchState() == false)
+        {
+            _stopCube1 = true;
+            Debug.Log("Cube1 stop");
+        }
+
+
+        if (_switchIsPressed2 == true && _stopCube2 == false)
+        {
+            _cube2.transform.position = new Vector3(_cube2.transform.position.x, _cube2.transform.position.y + 0.05f, _cube2.transform.position.z);
+            _rotateSwitch2.transform.Rotate(new Vector3(0, 0, 0.5f));
+            Debug.Log("Cube2 Monte");
+
+        }
+
+        if (_scriptCubeCollision2.GetSwitchState2() == false)
+        {
+            _stopCube2 = true;
+            Debug.Log("Cube2 stop");
+        }
+
+
 
         //if (_isSecretDoorOpen == true)
         //{

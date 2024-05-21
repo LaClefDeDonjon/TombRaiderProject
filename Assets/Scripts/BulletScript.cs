@@ -8,6 +8,7 @@ public class BulletScript : MonoBehaviour
     [SerializeField] private float _speedShoot = 1f;
     [SerializeField] private float _timerBullet = 0f;
     [SerializeField] private float _timerBulletLifeTime = 1f;
+    [SerializeField] private CharacterController _characterControlerBullet;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +20,7 @@ public class BulletScript : MonoBehaviour
     void Update()
     {
         _timerBullet = _timerBullet + Time.deltaTime;
-        transform.Translate(new Vector3(0, 1f, 0) /*gameObject.transform.forward*/ * _speedShoot * Time.deltaTime);
+        _characterControlerBullet.Move(_characterControlerBullet.transform.forward * _speedShoot * Time.deltaTime);
 
         if (_timerBullet > _timerBulletLifeTime)
         {

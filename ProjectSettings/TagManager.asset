@@ -21,6 +21,9 @@ TagManager:
   - Enemy
   - Lever5
   - Switch
+  - StopCube1
+  - Switch2
+  - StopCube2
   layers:
   - Default
   - TransparentFX
