@@ -26,6 +26,7 @@ public class CubeCollision1 : MonoBehaviour
         }
     }
 
+
     public bool GetSwitchState()
     {
         return _switchState;

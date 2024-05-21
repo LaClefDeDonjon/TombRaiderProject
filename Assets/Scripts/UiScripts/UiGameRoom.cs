@@ -278,7 +278,7 @@ public class UiGameRoom : MonoBehaviour
         if (_switchIsPressed2 == true && _stopCube2 == false)
         {
             _cube2.transform.position = new Vector3(_cube2.transform.position.x, _cube2.transform.position.y + 0.05f, _cube2.transform.position.z);
-            _rotateSwitch2.transform.Rotate(new Vector3(0, 0, 0.5f));
+            _rotateSwitch2.transform.Rotate(new Vector3(0, 0, 1f));
             Debug.Log("Cube2 Monte");
 
         }
