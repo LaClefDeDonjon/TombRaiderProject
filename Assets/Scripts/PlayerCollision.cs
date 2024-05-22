@@ -14,9 +14,14 @@ public class PlayerCollision : MonoBehaviour
     private bool _leverIsOn5 = false;
     private bool _switchIsOn = false;
     private bool _switchIsOn2 = false;
+    private bool _takeKey = false;
+    private bool _keyDoorOpen = false;
 
     [SerializeField] private int _lifeMax = 100;
     [SerializeField] private int _lifeCurrent = 100;
+
+    [SerializeField] private KeyRotate _scriptIsKeyTaking;
+    [SerializeField] private GameObject _keyBack;
 
 
 
@@ -76,6 +81,16 @@ public class PlayerCollision : MonoBehaviour
                 SceneManager.LoadScene("Level 2");
             }
 
+            if (collider.gameObject.tag == "TriggerToLevel3")
+            {
+                SceneManager.LoadScene("Level 3");
+            }
+
+            if (collider.gameObject.tag == "TriggerToLevel4")
+            {
+                SceneManager.LoadScene("Level 4");
+            }
+
             if (collider.gameObject.tag == "Lever")
             {
                 _leverIsOn = true;
@@ -118,10 +133,22 @@ public class PlayerCollision : MonoBehaviour
                 Debug.Log("Switch2 is True");
             }
 
-        if (collider.gameObject.tag == "Damage")
+            if (collider.gameObject.tag == "Key")
             {
-                Debug.Log("OnTriggerEnter Damage");
-                ChangeLife(collider.gameObject.GetComponent<Damage>().GetDamageCost());
+                _takeKey = true;
+            }
+
+            if (collider.gameObject.tag == "KeyDoor" && _scriptIsKeyTaking.GetIsTakingKey() == true)
+            {
+                _keyDoorOpen = true;
+                _keyBack.SetActive(false);
+                Debug.Log("keyDoorOpen est à true");
+            }
+
+            if (collider.gameObject.tag == "Damage")
+            {
+                    Debug.Log("OnTriggerEnter Damage");
+                    ChangeLife(collider.gameObject.GetComponent<Damage>().GetDamageCost());
             }
 
 
@@ -260,6 +287,15 @@ public class PlayerCollision : MonoBehaviour
         return _lifeCurrent;
     }
 
+    public bool GetKeyState()
+    {
+        return _takeKey;
+    }
+
+    public bool GetkeyDoorState()
+    {
+        return _keyDoorOpen;
+    }
 
 
     public int GetLifeMax()

@@ -24,6 +24,10 @@ TagManager:
   - StopCube1
   - Switch2
   - StopCube2
+  - Key
+  - KeyDoor
+  - TriggerToLevel3
+  - TriggerToLevel4
   layers:
   - Default
   - TransparentFX
