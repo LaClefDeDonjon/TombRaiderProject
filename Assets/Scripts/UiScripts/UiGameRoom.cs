@@ -23,13 +23,14 @@ public class UiGameRoom : MonoBehaviour
     [SerializeField] private GameObject _rotateLever3;
     [SerializeField] private GameObject _effectLever4;
     [SerializeField] private GameObject _effectLever5;
+    [SerializeField] private GameObject _effectLever6;
     [SerializeField] private GameObject _rotateLever4;
     [SerializeField] private GameObject _rotateLever5;
     [SerializeField] private GameObject _cube1;
     [SerializeField] private GameObject _rotateSwitch;
     [SerializeField] private GameObject _cube2;
     [SerializeField] private GameObject _rotateSwitch2;
-    [SerializeField] private GameObject _boulet;
+    //[SerializeField] private GameObject _boulet;
 
     private Vector3 _velocity=Vector3.zero;
     [SerializeField] private float _gravity = 0.098f;
@@ -43,7 +44,6 @@ public class UiGameRoom : MonoBehaviour
     [SerializeField] private BadGuyScript _badGuyScript;
     [SerializeField] private CubeCollision1 _scriptCubeCollision1;
     [SerializeField] private CubeCollision2 _scriptCubeCollision2;
-    [SerializeField] private PlayerCollision _scriptKeyDoor;
 
     //private bool _isJumpPressed = false;
     [SerializeField] private float _jumpImpulse = 1f;
@@ -59,11 +59,12 @@ public class UiGameRoom : MonoBehaviour
     private bool _leverIsPressed3;
     private bool _leverIsPressed4;
     private bool _leverIsPressed5;
+    private bool _leverIsPressed6;
     private bool _switchIsPressed;
     private bool _switchIsPressed2;
     private bool _stopCube1 = false;
     private bool _stopCube2 = false;
-    private int _bouletState = 0;
+    //private int _bouletState = 1;
 
 
 
@@ -189,6 +190,13 @@ public class UiGameRoom : MonoBehaviour
             Debug.Log("leverPressed5 est a true");
         }
 
+        if (_scriptCollision.GetLeverState6() == true)
+        {
+            _leverIsPressed6 = true;
+
+            Debug.Log("leverPressed6 est a true");
+        }
+
         if (_scriptCollision.GetSwitchState() == true)
         {
             _switchIsPressed = true;
@@ -223,26 +231,37 @@ public class UiGameRoom : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (_bouletState == 0)
+
+        if (_scriptCollision.GetkeyDoorState() == true && (_effectLever.transform.rotation.eulerAngles.y > 270f || _effectLever.transform.rotation.eulerAngles.y < 5f))
         {
-            
-        }
-        if (_boulet.transform.rotation.eulerAngles.x <= 90f )
-        {
-            _boulet.transform.Rotate(1, 0, 0);
-            _bouletState = 1;
-        }
-        if (_bouletState == 1)
-        {
-            
-        }
-        if (_boulet.transform.rotation.eulerAngles.x <= -180f)
-        {
-            _boulet.transform.Rotate(-1, 0, 0);
-            _bouletState = 0;
+            Debug.Log("Rot y " + _effectLever.transform.rotation.eulerAngles.y);
+            //Debug.Log("Keydoor et la rotation sont true");
+            _effectLever.transform.Rotate(new Vector3(0, -5f, 0));
         }
 
-        
+        if (_scriptCollision.GetkeyDoorState2() == true && (_effectLever2.transform.rotation.eulerAngles.y > 270f || _effectLever2.transform.rotation.eulerAngles.y < 5f))
+        {
+            Debug.Log("Rot y " + _effectLever2.transform.rotation.eulerAngles.y);
+            //Debug.Log("Keydoor et la rotation sont true");
+            _effectLever2.transform.Rotate(new Vector3(0, -5f, 0));
+        }
+
+        if (_scriptCollision.GetkeyDoorState3() == true && (_effectLever3.transform.rotation.eulerAngles.y > 180f || _effectLever3.transform.rotation.eulerAngles.y < 5f))
+        {
+            Debug.Log("Rot y " + _effectLever3.transform.rotation.eulerAngles.y);
+            //Debug.Log("Keydoor et la rotation sont true");
+            _effectLever3.transform.Rotate(new Vector3(0, -5f, 0));
+        }
+
+        if (_scriptCollision.GetkeyDoorState4() == true && (_effectLever4.transform.rotation.eulerAngles.y >= 95f || _effectLever4.transform.rotation.eulerAngles.y < 5f))
+        {
+            Debug.Log("Rot y " + _effectLever4.transform.rotation.eulerAngles.y);
+            //Debug.Log("Keydoor et la rotation sont true");
+            _effectLever4.transform.Rotate(new Vector3(0, -5f, 0));
+        }
+
+
+
         if (_leverIsPressed == true && _scriptDoorCollision.GetLeverStateFinal() == true && (_effectLever.transform.rotation.eulerAngles.y > 270f || _effectLever.transform.rotation.eulerAngles.y < 5f))
         {
             Debug.Log("Rot y "+_effectLever.transform.rotation.eulerAngles.y);
@@ -250,12 +269,7 @@ public class UiGameRoom : MonoBehaviour
             _rotateLever.transform.Rotate(new Vector3(5f, 0, 0));
         }
 
-        if (_scriptKeyDoor.GetkeyDoorState() == true && (_effectLever.transform.rotation.eulerAngles.y > 270f || _effectLever.transform.rotation.eulerAngles.y < 5f))
-        {
-            Debug.Log("Rot y " + _effectLever.transform.rotation.eulerAngles.y);
-            //Debug.Log("Keydoor et la rotation sont true");
-            _effectLever.transform.Rotate(new Vector3(0, -5f, 0));
-        }
+
 
         if (_leverIsPressed2 == true && _scriptDoorCollision2.GetLeverStateFinal2() == true && (_effectLever2.transform.rotation.eulerAngles.y > 185f || _effectLever2.transform.rotation.eulerAngles.y < 5f))
         {
@@ -288,6 +302,12 @@ public class UiGameRoom : MonoBehaviour
             Debug.Log("Rot y " + _effectLever5.transform.rotation.eulerAngles.y);
             _effectLever5.transform.Rotate(new Vector3(0, -5f, 0));
             _rotateLever5.transform.Rotate(new Vector3(5f, 0, 0));
+
+        }
+
+        if (_leverIsPressed6 == true)
+        {
+            Destroy(_effectLever6);
 
         }
 

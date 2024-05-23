@@ -12,16 +12,26 @@ public class PlayerCollision : MonoBehaviour
     private bool _leverIsOn3 = false;
     private bool _leverIsOn4 = false;
     private bool _leverIsOn5 = false;
+    private bool _leverIsOn6 = false;
     private bool _switchIsOn = false;
     private bool _switchIsOn2 = false;
     private bool _takeKey = false;
+    private bool _takeKey2 = false;
+    private bool _takeKey3 = false;
+    private bool _takeKey4 = false;
     private bool _keyDoorOpen = false;
+    private bool _keyDoorOpen2 = false;
+    private bool _keyDoorOpen3 = false;
+    private bool _keyDoorOpen4 = false;
 
     [SerializeField] private int _lifeMax = 100;
     [SerializeField] private int _lifeCurrent = 100;
 
     [SerializeField] private KeyRotate _scriptIsKeyTaking;
     [SerializeField] private GameObject _keyBack;
+    [SerializeField] private GameObject _keyBack2;
+    [SerializeField] private GameObject _keyBack3;
+    [SerializeField] private GameObject _keyBack4;
 
 
 
@@ -121,6 +131,12 @@ public class PlayerCollision : MonoBehaviour
                 Debug.Log("Lever5 is True");
             }
 
+            if (collider.gameObject.tag == "Lever6")
+            {
+                _leverIsOn6 = true;
+                Debug.Log("Lever6 is True");
+            }
+
             if (collider.gameObject.tag == "Switch")
             {
                 _switchIsOn = true;
@@ -138,11 +154,47 @@ public class PlayerCollision : MonoBehaviour
                 _takeKey = true;
             }
 
+            if (collider.gameObject.tag == "Key2")
+            {
+                _takeKey2 = true;
+            }
+
+            if (collider.gameObject.tag == "Key3")
+            {
+                _takeKey3 = true;
+            }
+
+            if (collider.gameObject.tag == "Key4")
+            {
+                _takeKey4 = true;
+            }
+
             if (collider.gameObject.tag == "KeyDoor" && _scriptIsKeyTaking.GetIsTakingKey() == true)
             {
                 _keyDoorOpen = true;
                 _keyBack.SetActive(false);
                 Debug.Log("keyDoorOpen est à true");
+            }
+
+            if (collider.gameObject.tag == "KeyDoor2" && _scriptIsKeyTaking.GetIsTakingKey2() == true)
+            {
+                _keyDoorOpen2 = true;
+                _keyBack2.SetActive(false);
+                Debug.Log("keyDoorOpen2 est à true");
+            }
+
+            if (collider.gameObject.tag == "KeyDoor3" && _scriptIsKeyTaking.GetIsTakingKey3() == true)
+            {
+                _keyDoorOpen3 = true;
+                _keyBack3.SetActive(false);
+                Debug.Log("keyDoorOpen3 est à true");
+            }
+
+            if (collider.gameObject.tag == "KeyDoor4" && _scriptIsKeyTaking.GetIsTakingKey4() == true)
+            {
+                _keyDoorOpen4 = true;
+                _keyBack4.SetActive(false);
+                Debug.Log("keyDoorOpen4 est à true");
             }
 
             if (collider.gameObject.tag == "Damage")
@@ -211,6 +263,12 @@ public class PlayerCollision : MonoBehaviour
             Debug.Log("Lever5 is False");
         }
 
+        if (collider.gameObject.tag == "Lever6")
+        {
+            _leverIsOn6 = false;
+            Debug.Log("Lever6 is False");
+        }
+
         if (collider.gameObject.tag == "Switch")
         {
             _switchIsOn = false;
@@ -272,6 +330,11 @@ public class PlayerCollision : MonoBehaviour
         return _leverIsOn5;
     }
 
+    public bool GetLeverState6()
+    {
+        return _leverIsOn6;
+    }
+
     public bool GetSwitchState()
     {
         return _switchIsOn;
@@ -292,11 +355,40 @@ public class PlayerCollision : MonoBehaviour
         return _takeKey;
     }
 
+    public bool GetKeyState2()
+    {
+        return _takeKey2;
+    }
+
+    public bool GetKeyState3()
+    {
+        return _takeKey3;
+    }
+
+    public bool GetKeyState4()
+    {
+        return _takeKey4;
+    }
+
     public bool GetkeyDoorState()
     {
         return _keyDoorOpen;
     }
 
+    public bool GetkeyDoorState2()
+    {
+        return _keyDoorOpen2;
+    }
+
+    public bool GetkeyDoorState3()
+    {
+        return _keyDoorOpen3;
+    }
+
+    public bool GetkeyDoorState4()
+    {
+        return _keyDoorOpen4;
+    }
 
     public int GetLifeMax()
     {

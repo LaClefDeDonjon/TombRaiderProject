@@ -28,6 +28,13 @@ TagManager:
   - KeyDoor
   - TriggerToLevel3
   - TriggerToLevel4
+  - Key2
+  - KeyDoor2
+  - Lever6
+  - Key3
+  - KeyDoor3
+  - Key4
+  - KeyDoor4
   layers:
   - Default
   - TransparentFX
