@@ -13,6 +13,7 @@ public class PlayerCollision : MonoBehaviour
     private bool _leverIsOn4 = false;
     private bool _leverIsOn5 = false;
     private bool _leverIsOn6 = false;
+    private bool _leverIsOn7 = false;
     private bool _switchIsOn = false;
     private bool _switchIsOn2 = false;
     private bool _takeKey = false;
@@ -32,6 +33,7 @@ public class PlayerCollision : MonoBehaviour
     [SerializeField] private GameObject _keyBack2;
     [SerializeField] private GameObject _keyBack3;
     [SerializeField] private GameObject _keyBack4;
+    [SerializeField] private GameObject _treasure;
 
 
 
@@ -47,7 +49,7 @@ public class PlayerCollision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     
     void OnTriggerStay(Collider collider)
@@ -68,6 +70,12 @@ public class PlayerCollision : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
+            if (collider.gameObject.tag == "Treasure") 
+            {
+                SceneManager.LoadScene("Level 6");
+            }
+
+
             if (collider.gameObject.tag == "Ground")
             {
                 Debug.Log("collision with groud");
@@ -137,6 +145,12 @@ public class PlayerCollision : MonoBehaviour
                 Debug.Log("Lever6 is True");
             }
 
+            if (collider.gameObject.tag == "Lever7")
+            {
+                _leverIsOn7 = true;
+                Debug.Log("Lever7 is True");
+            }
+
             if (collider.gameObject.tag == "Switch")
             {
                 _switchIsOn = true;
@@ -201,6 +215,11 @@ public class PlayerCollision : MonoBehaviour
             {
                     Debug.Log("OnTriggerEnter Damage");
                     ChangeLife(collider.gameObject.GetComponent<Damage>().GetDamageCost());
+            }
+
+            if (_lifeCurrent == 0)
+            {
+                SceneManager.LoadScene("Game");
             }
 
 
@@ -269,6 +288,12 @@ public class PlayerCollision : MonoBehaviour
             Debug.Log("Lever6 is False");
         }
 
+        if (collider.gameObject.tag == "Lever7")
+        {
+            _leverIsOn7 = false;
+            Debug.Log("Lever7 is False");
+        }
+
         if (collider.gameObject.tag == "Switch")
         {
             _switchIsOn = false;
@@ -333,6 +358,11 @@ public class PlayerCollision : MonoBehaviour
     public bool GetLeverState6()
     {
         return _leverIsOn6;
+    }
+
+    public bool GetLeverState7()
+    {
+        return _leverIsOn7;
     }
 
     public bool GetSwitchState()

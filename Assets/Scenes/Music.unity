@@ -1421,15 +1421,7 @@ MonoBehaviour:
     m_Options:
     - m_Text: Choix
       m_Image: {fileID: 0}
-    - m_Text: Musique 1
-      m_Image: {fileID: 0}
-    - m_Text: Musique 2
-      m_Image: {fileID: 0}
-    - m_Text: Musique 3
-      m_Image: {fileID: 0}
-    - m_Text: Musique 4
-      m_Image: {fileID: 0}
-    - m_Text: Musique 5
+    - m_Text: Y'en a pas en fait :p
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:

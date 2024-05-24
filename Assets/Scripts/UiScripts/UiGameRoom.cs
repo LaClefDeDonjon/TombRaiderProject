@@ -23,7 +23,8 @@ public class UiGameRoom : MonoBehaviour
     [SerializeField] private GameObject _rotateLever3;
     [SerializeField] private GameObject _effectLever4;
     [SerializeField] private GameObject _effectLever5;
-    [SerializeField] private GameObject _effectLever6;
+    [SerializeField] private GameObject _effectLever6, _lever6;
+    [SerializeField] private GameObject _effectLever7, _lever7, _golemDead;
     [SerializeField] private GameObject _rotateLever4;
     [SerializeField] private GameObject _rotateLever5;
     [SerializeField] private GameObject _cube1;
@@ -60,6 +61,7 @@ public class UiGameRoom : MonoBehaviour
     private bool _leverIsPressed4;
     private bool _leverIsPressed5;
     private bool _leverIsPressed6;
+    private bool _leverIsPressed7;
     private bool _switchIsPressed;
     private bool _switchIsPressed2;
     private bool _stopCube1 = false;
@@ -197,6 +199,13 @@ public class UiGameRoom : MonoBehaviour
             Debug.Log("leverPressed6 est a true");
         }
 
+        if (_scriptCollision.GetLeverState7() == true)
+        {
+            _leverIsPressed7 = true;
+
+            Debug.Log("leverPressed7 est a true");
+        }
+
         if (_scriptCollision.GetSwitchState() == true)
         {
             _switchIsPressed = true;
@@ -308,6 +317,15 @@ public class UiGameRoom : MonoBehaviour
         if (_leverIsPressed6 == true)
         {
             Destroy(_effectLever6);
+            Destroy(_lever6);
+
+        }
+
+        if (_leverIsPressed7 == true)
+        {
+            Destroy(_effectLever7);
+            Destroy(_lever7);
+            _golemDead.SetActive(true);
 
         }
 

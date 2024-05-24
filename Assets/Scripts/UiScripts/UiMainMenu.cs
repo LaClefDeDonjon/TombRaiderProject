@@ -49,25 +49,25 @@ public class UiMainMenu : MonoBehaviour
 
         //Rotation du bouton Credit
         
-        if (RotationCreditsButton.localRotation.z <= 3f)
-        {
-            IsRotate = true;
-        }
-        else if (RotationCreditsButton.localRotation.z >= 4f)
-        {
-            IsRotate = false;
-        }
+        //if (RotationCreditsButton.localRotation.z <= 3f)
+        //{
+        //    IsRotate = true;
+        //}
+        //else if (RotationCreditsButton.localRotation.z >= 4f)
+        //{
+        //    IsRotate = false;
+        //}
 
-        if (IsRotate == true)
-        {
-            RotationCreditsButton.localRotation = Quaternion.Euler(0f, 0f, RotationCreditsButton.localRotation.z + SpeedRotate);
-            SpeedRotate = SpeedRotate + 0.5f;
-        }
-        else if (IsRotate == false)
-        {
-            RotationCreditsButton.localRotation = Quaternion.Euler(0f, 0f, RotationCreditsButton.localRotation.z - SpeedRotate);
-            SpeedRotate = SpeedRotate - 0.5f;
-        }
+        //if (IsRotate == true)
+        //{
+        //    RotationCreditsButton.localRotation = Quaternion.Euler(0f, 0f, RotationCreditsButton.localRotation.z + SpeedRotate);
+        //    SpeedRotate = SpeedRotate + 0.5f;
+        //}
+        //else if (IsRotate == false)
+        //{
+        //    RotationCreditsButton.localRotation = Quaternion.Euler(0f, 0f, RotationCreditsButton.localRotation.z - SpeedRotate);
+        //    SpeedRotate = SpeedRotate - 0.5f;
+        //}
         
 
         //Battement du logo

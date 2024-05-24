@@ -35,6 +35,8 @@ TagManager:
   - KeyDoor3
   - Key4
   - KeyDoor4
+  - Lever7
+  - Treasure
   layers:
   - Default
   - TransparentFX
