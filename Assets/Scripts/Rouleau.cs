@@ -8,6 +8,8 @@ public class Rouleau : MonoBehaviour
 {
     [SerializeField] private GameObject _rouleauHaut;
     [SerializeField] private GameObject _rouleauBas;
+    [SerializeField] private GameObject _rouleauAll;
+    [SerializeField] private float _speedRouleau = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -21,5 +23,8 @@ public class Rouleau : MonoBehaviour
         _rouleauHaut.transform.Rotate(-1.5f, 0, 0);
 
         _rouleauBas.transform.Rotate(1.5f, 0, 0);
+
+        _rouleauAll.transform.Translate(0, 0, -_speedRouleau);
+
     }
 }
