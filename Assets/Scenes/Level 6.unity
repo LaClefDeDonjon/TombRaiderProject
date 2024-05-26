@@ -59946,7 +59946,7 @@ MonoBehaviour:
   _rouleauHaut: {fileID: 1683769364}
   _rouleauBas: {fileID: 1839182429}
   _rouleauAll: {fileID: 298572053}
-  _speedRouleau: 0.0338
+  _speedRouleau: 0.034
 --- !u!1001 &1299814357
 PrefabInstance:
   m_ObjectHideFlags: 0
