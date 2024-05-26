@@ -109,6 +109,21 @@ public class PlayerCollision : MonoBehaviour
                 SceneManager.LoadScene("Level 4");
             }
 
+            if (collider.gameObject.tag == "TriggerToLevel5")
+            {
+                SceneManager.LoadScene("Level 5");
+            }
+
+            if (collider.gameObject.tag == "TriggerToLevel6")
+            {
+                SceneManager.LoadScene("Level 6");
+            }
+
+            if (collider.gameObject.tag == "End")
+            {
+                SceneManager.LoadScene("MainMenu");
+            }
+
             if (collider.gameObject.tag == "Lever")
             {
                 _leverIsOn = true;

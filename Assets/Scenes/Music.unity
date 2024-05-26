@@ -1421,7 +1421,7 @@ MonoBehaviour:
     m_Options:
     - m_Text: Choix
       m_Image: {fileID: 0}
-    - m_Text: Y'en a pas en fait :p
+    - m_Text: Silence de Plomb
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:

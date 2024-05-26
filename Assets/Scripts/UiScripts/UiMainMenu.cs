@@ -26,7 +26,7 @@ public class UiMainMenu : MonoBehaviour
         
     }
 
-    void Update()
+    void FixedUpdate()
     {
         //Bounce du Boutton Jouer
         if (SizePlayButton.localScale.x <= 1.5f)

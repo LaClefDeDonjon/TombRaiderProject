@@ -37,6 +37,9 @@ TagManager:
   - KeyDoor4
   - Lever7
   - Treasure
+  - TriggerToLevel5
+  - TriggerToLevel6
+  - End
   layers:
   - Default
   - TransparentFX
